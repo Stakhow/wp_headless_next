@@ -1,0 +1,18 @@
+version: "3.3"
+
+services:
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile.prod
+    container_name: app-client
+#    command: serve -s build -l 3000
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    networks:
+      app-network:
+
+networks:
+  app-network:
+    driver: bridge
