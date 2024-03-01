@@ -1,8 +1,60 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
+import type { Metadata } from "next";
+import localFont from 'next/font/local'
+import { Roboto } from "next/font/google";
 
-const inter = Inter({ subsets: ["latin"] });
+const roboto = Roboto({
+  weight: ['100', '300', '400', '500', '700', '900'],
+  subsets: ['latin'],
+  variable: '--font-roboto',
+  display: 'swap',
+});
+
+const helvetica = localFont({
+  src: [
+    {
+      path: '../../public/fonts/helvetica/helvetica_bold.otf',
+      weight: '600',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/helvetica/helvetica_boldoblique.otf',
+      weight: '600',
+      style: 'italic',
+    },
+    {
+      path: '../../public/fonts/helvetica/helvetica_cyr_boldoblique.ttf',
+      weight: '600',
+      style: 'italic',
+    },
+    {
+      path: '../../public/fonts/helvetica/helvetica_cyr_oblique.ttf',
+      weight: '400',
+      style: 'italic',
+    },
+    {
+      path: '../../public/fonts/helvetica/helvetica_light.otf',
+      weight: '300',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/helvetica/helvetica_lightoblique.otf',
+      weight: '300',
+      style: 'italic',
+    },
+    {
+      path: '../../public/fonts/helvetica/helvetica_oblique.otf',
+      weight: '400',
+      style: 'italic',
+    },
+    {
+      path: '../../public/fonts/helvetica/helvetica_regular.otf',
+      weight: '400',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-helvetica',
+});
 
 export const metadata: Metadata = {
   title: "MHK Home Kitchen",
@@ -16,7 +68,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={`${helvetica.variable} ${roboto.variable}`}>
+        {children}
+      </body>
     </html>
   );
 }

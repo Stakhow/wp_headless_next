@@ -1,6 +1,6 @@
 import type { Config } from "tailwindcss";
 
-const plugin = require('tailwindcss/plugin')
+const plugin = require('tailwindcss/plugin');
 
 const config: Config = {
   content: [
@@ -25,6 +25,10 @@ const config: Config = {
         'warning': '#FFC928',
         'warning-bg': '#FFC9281A',
         'warning-text': '#9F7F1E',
+      },
+      fontFamily: {
+        helvetica: ['var(--font-helvetica)'],
+        roboto: ['var(--font-roboto)'],
       }
     },
   },
@@ -32,9 +36,9 @@ const config: Config = {
     plugin(function ({ addComponents, theme }) {
       addComponents({
         '.heading-1': {
-          'fontWeight': '600',
-          'fontSize': '52px',
-          // lineHeight: 'calc(58 / 52 * 1em)',
+          fontWeight: '600',
+          fontSize: '52px',
+          lineHeight: 'calc(58 / 52 * 1em)',
         }
       })
     })
