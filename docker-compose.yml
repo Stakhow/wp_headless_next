@@ -6,7 +6,7 @@ services:
       context: ./client
       dockerfile: Dockerfile.prod
     container_name: app-client
-#    command: serve -s build -l 3000
+    command: yarn build
     ports:
       - "3000:3000"
     restart: unless-stopped
