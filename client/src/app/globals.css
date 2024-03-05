@@ -3,9 +3,107 @@
 @tailwind utilities;
 
 @layer base {
-	body {
-		font-family: var(--font-helvetica);
-	}
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+    }
+    body {
+        font-family: var(--font-helvetica);
+    }
+    h1 {
+        @apply heading-1;
+    }
+    h2 {
+        @apply heading-2 text-title-text;
+    }
+    h3 {
+        @apply heading-3 text-title-text;
+    }
+    h4 {
+        @apply heading-4 text-title-text;
+    }
+    h5 {
+        @apply heading-5 text-title-text;
+    }
+
+    p {
+        @apply prose-base text-body-text;
+    }
+
+    .text-sm {
+        font-size: 13px;
+    }
+
+    button {
+        outline: none;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+    .text {
+        @apply text-[13px] uppercase tracking-[3px];
+    }
+
+    .banner-text h1 {
+        @apply [text-shadow:_0px_0px_25px_rgba(0_0_0_0.5)];
+    }
+    .banner-text p {
+        @apply text text-white [text-shadow:_0px_0px_4px_#000000];
+    }
+
+    .menu-link {
+        @apply text transition md:hover:text-highlight;
+    }
+
+    .post {
+        p strong {
+            @apply text text-highlight;
+        }
+        h2,
+        h3 {
+            @apply mb-8;
+        }
+    }
+
+    .about-us p {
+        @apply text-white md:text-body-text;
+    }
+
+    .fade-in {
+        opacity: 0;
+        animation-name: fadeIn;
+        animation-duration: 1s;
+        animation-fill-mode: forwards;
+    }
+
+    .fade-out {
+        opacity: 0;
+        animation-name: fadeOut;
+        animation-duration: 1s;
+        animation-fill-mode: forwards;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes fadeOut {
+        from {
+            opacity: 1;
+        }
+        to {
+            opacity: 0;
+        }
+    }
+    .copyright p {
+        @apply text-sm;
+    }
 }
 @layer utilities {
 }
