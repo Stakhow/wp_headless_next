@@ -40,3 +40,7 @@ next-env.d.ts
 # VSCode & Webstorm history directories
 .history
 .idea
+
+# databases
+db_dev_data
+db_data

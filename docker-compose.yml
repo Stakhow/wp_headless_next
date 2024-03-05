@@ -13,6 +13,55 @@ services:
     networks:
       app-network:
 
+  db:
+    image: mysql:5.7
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: somewordpress
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+    networks:
+      app-network:
+
+  server:
+    build:
+      context: ./server
+    depends_on:
+      - db
+    image: wordpress:latest
+    volumes:
+      - ./server/:/var/www/html
+    ports:
+      - "81:81"
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+    networks:
+      app-network:
+
+  nginx:
+    image: nginx:stable-alpine
+    container_name: app-nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf.prod:/etc/nginx/conf.d/nginx.conf
+    depends_on:
+      - client
+      - server
+    networks:
+      app-network:
+
+volumes:
+  db_data: {}
+  wordpress_data: {}
+
 networks:
   app-network:
     driver: bridge

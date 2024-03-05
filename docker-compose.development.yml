@@ -11,3 +11,11 @@ services:
     volumes:
       - ./client:/usr/src/app
 
+  db:
+    volumes:
+      - ./db_dev_data:/var/lib/mysql
+
+  nginx:
+    volumes:
+      - ./nginx/nginx.conf.dev:/etc/nginx/conf.d/nginx.conf
+
