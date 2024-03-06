@@ -1,0 +1,1 @@
+export const API_GRAPHQL_URL = 'http://admin.mtc-home-kitchen.local/graphql';

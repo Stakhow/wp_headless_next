@@ -1,7 +1,9 @@
 'use client';
 
 import { Button } from '../Button/index';
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
+import {getGallery} from "../../api/index";
+import {kMaxLength} from "buffer";
 
 export const Gallery = ({
     items,
@@ -12,11 +14,15 @@ export const Gallery = ({
 }) => {
     const [_items, _setItems] = useState(items);
 
-    const loadMore = () => {
+    const loadMore = async () => {
         const arr = [..._items, { src: '/img/gallery-2.png' }];
 
-        _setItems(arr);
+        const res = await getGallery();
+        console.log('res', res);
     };
+
+    useEffect(() => {
+    }, []);
 
     return (
         <div className="gallery" {...props}>
