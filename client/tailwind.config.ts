@@ -24,7 +24,7 @@ const config: Config = {
             screens: {
                 '2col': '670px',
                 '3col': '1000px',
-                '4col': '1330px',
+                '4col': '1345px',
             },
             backgroundImage: {},
             colors: {
