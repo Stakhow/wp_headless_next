@@ -1,0 +1,18 @@
+query GalleryQuery {
+  gallery(first: 4, after: "${lastItemId}") {
+    pageInfo {
+      endCursor
+      hasNextPage
+      hasPreviousPage
+    }
+    nodes {
+      id
+      featuredImage {
+        node {
+          sourceUrl
+        }
+      }
+      title
+    }
+  }
+}

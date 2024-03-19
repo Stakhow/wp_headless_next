@@ -33,16 +33,16 @@ export const Slider = ({
 
     const sliderInterval = useRef<number | undefined>();
 
-    useEffect(() => () => clearInterval(sliderInterval.current), []);
+    // useEffect(() => () => clearInterval(sliderInterval.current), []);
 
     useEffect(() => {
         if (isAutoPlayOn) {
-            sliderInterval.current = window.setInterval(() => {
-                increment();
-            }, intervalInSeconds * 1000);
+            // sliderInterval.current = window.setInterval(() => {
+            //     increment();
+            // }, intervalInSeconds * 1000);
         } else {
-            clearInterval(sliderInterval.current);
-            sliderInterval.current = undefined;
+            // clearInterval(sliderInterval.current);
+            // sliderInterval.current = undefined;
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isAutoPlayOn]);

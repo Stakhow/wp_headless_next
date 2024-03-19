@@ -5,7 +5,7 @@ import { AboutUs } from '../components/AboutUs';
 import { Testimonials } from '../components/Testimonials';
 import { Gallery } from '../components/Gallery';
 
-export default function Home() {
+export default async function Home() {
     return (
         <div className={'flex min-h-screen flex-col justify-between'}>
             <Header />
@@ -23,14 +23,7 @@ export default function Home() {
                             Customer Gallery
                         </h3>
 
-                        <Gallery
-                            items={[
-                                { src: '/img/gallery-1.png' },
-                                { src: '/img/gallery-2.png' },
-                                { src: '/img/gallery-3.png' },
-                                { src: '/img/gallery-4.png' },
-                            ]}
-                        />
+                        <Gallery />
                     </div>
                 </div>
             </main>
@@ -39,3 +32,6 @@ export default function Home() {
         </div>
     );
 }
+
+export const dynamic = 'force-static';
+export const revalidate = 1;

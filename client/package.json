@@ -10,15 +10,20 @@
         "format:fix": "prettier --write --ignore-path .gitignore .",
         "ts:check": "tsc --pretty --noEmit",
         "lint:fix": "yarn lint --fix --resolve-plugins-relative-to \"./src/**/*.{ts,tsx}\"",
-        "precommit": "yarn ts:check && prettier --write \"./src/**/*.{js,jsx,ts,tsx,css}\" && yarn lint:fix"
+        "precommit": "yarn ts:check && prettier --write \"./src/**/*.{js,jsx,ts,tsx,css}\" && yarn lint:fix",
+        "generate": "graphql-codegen --config codegen.ts"
     },
     "dependencies": {
         "axios": "^1.6.7",
+        "graphql": "^16.8.1",
         "next": "14.1.0",
         "react": "^18",
         "react-dom": "^18"
     },
     "devDependencies": {
+        "@graphql-codegen/cli": "5.0.2",
+        "@graphql-codegen/client-preset": "4.2.4",
+        "@graphql-codegen/typescript": "^4.0.6",
         "@types/node": "^20",
         "@types/react": "^18",
         "@types/react-dom": "^18",

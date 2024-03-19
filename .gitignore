@@ -41,6 +41,6 @@ next-env.d.ts
 .history
 .idea
 
-# databases
-db_dev_data
-db_data
+# databases (commented for test)
+#db_dev_data
+#db_data

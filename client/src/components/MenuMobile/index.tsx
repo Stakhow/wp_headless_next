@@ -1,12 +1,10 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { FacebookIcon } from '../Icons/FacebookIcon/index';
-import { TwitterIcon } from '../Icons/TwitterIcon/index';
-import { InstagramIcon } from '../Icons/InstagramIcon/index';
-import { Logo } from '../Logo/index';
+import { SocialMedia } from '../SocialMedia/index';
+import { TMenuItem } from '../../shared/types/index';
 
-export const MenuMobile = () => {
+export const MenuMobile = ({ menu }: { menu: TMenuItem[] }) => {
     const [active, setActive] = useState<boolean>(false);
 
     useEffect(() => {
@@ -40,6 +38,24 @@ export const MenuMobile = () => {
         </button>
     );
 
+    const Menu = ({ menu }: { menu: TMenuItem[] }) => {
+        const MenuItems = menu.map(({ url, title, id }) => (
+            <li key={`menu-item-${id}`} className={'mb-2 text-center'}>
+                <a href={url} className={'text text-[20px]'}>
+                    <span>{title}</span>
+                </a>
+            </li>
+        ));
+
+        return !!menu.length ? (
+            <nav className="header-menu mb-5">
+                <ul>{MenuItems}</ul>
+            </nav>
+        ) : (
+            ''
+        );
+    };
+
     return (
         <div className={'test-lg block lg:hidden'}>
             <MenuButton isActive={active} />
@@ -47,64 +63,9 @@ export const MenuMobile = () => {
             {active && (
                 <div className="menu-mobile d fixed inset-0 z-10 bg-black text-white">
                     <div className="container mx-auto flex max-w-[300px] flex-col items-center justify-center py-14">
-                        <nav className="header-menu mb-5">
-                            <ul>
-                                <li className={'mb-2 text-center'}>
-                                    <a
-                                        href="/shop"
-                                        className={'text text-[20px]'}
-                                    >
-                                        <span>Shop</span>
-                                    </a>
-                                </li>
-                                <li className={'mb-2 text-center'}>
-                                    <a
-                                        href="/plan-my-kitchen"
-                                        className={'text text-[20px]'}
-                                    >
-                                        <span>Plan my kitchen</span>
-                                    </a>
-                                </li>
+                        <Menu menu={menu} />
 
-                                <li className={'mb-2 text-center'}>
-                                    <a
-                                        href="/about-us"
-                                        className={'text text-[20px]'}
-                                    >
-                                        <span>About us</span>
-                                    </a>
-                                </li>
-                                <li className={'mb-2 text-center'}>
-                                    <a
-                                        href="/gallery"
-                                        className={'text text-[20px]'}
-                                    >
-                                        <span>Gallery</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
-
-                        <div className="flex justify-center">
-                            <a
-                                className="mx-3 inline-block"
-                                href="https://facebook.com"
-                            >
-                                <FacebookIcon />
-                            </a>
-                            <a
-                                className="mx-3 inline-block"
-                                href="https://twitter.com"
-                            >
-                                <TwitterIcon />
-                            </a>
-                            <a
-                                className="mx-3 inline-block"
-                                href="https://instagram.com"
-                            >
-                                <InstagramIcon />
-                            </a>
-                        </div>
+                        <SocialMedia variant={'mobile'} />
                     </div>
                 </div>
             )}

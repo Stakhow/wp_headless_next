@@ -1,11 +1,32 @@
-import { FacebookIcon } from '../Icons/FacebookIcon/index';
-import { TwitterIcon } from '../Icons/TwitterIcon/index';
-import { InstagramIcon } from '../Icons/InstagramIcon/index';
-import { ButtonOutline } from '../ButtonOutline/index';
-import { Logo } from '../Logo/index';
-import { MenuMobile } from '../MenuMobile/index';
+import { ButtonOutline } from '../ButtonOutline';
+import { Logo } from '../Logo';
+import { MenuMobile } from '../MenuMobile';
+import { TMenu } from '../../shared/types/index';
+import { SocialMedia } from '../SocialMedia/index';
+import { getMenu } from '../../api/index';
 
-export const Header = () => {
+export const Header = async () => {
+    const menu1 = await getMenu('4');
+    const menu2 = await getMenu('5');
+
+    const Menu = ({ menu }: { menu: TMenu }) => {
+        const MenuItems = menu.items.map(({ url, title, id }) => (
+            <li key={`menu-item-${id}`} className={'mx-3 text-center'}>
+                <a href={url} className={'menu-link'}>
+                    <span>{title}</span>
+                </a>
+            </li>
+        ));
+
+        return !!menu.items.length ? (
+            <nav className="header-menu hidden lg:flex">
+                <ul className="flex">{MenuItems}</ul>
+            </nav>
+        ) : (
+            ''
+        );
+    };
+
     return (
         <header
             className={
@@ -14,63 +35,15 @@ export const Header = () => {
         >
             <div className="container mx-auto divide-y px-4">
                 <div className="mb-3 flex items-center justify-between md:mb-[30px]">
-                    <MenuMobile />
+                    <MenuMobile menu={[...menu1.items, ...menu2.items]} />
 
-                    <div className="hidden lg:flex">
-                        <a
-                            className="mr-5 inline-block"
-                            href="https://facebook.com"
-                        >
-                            <FacebookIcon />
-                        </a>
-                        <a
-                            className="mr-5 inline-block"
-                            href="https://twitter.com"
-                        >
-                            <TwitterIcon />
-                        </a>
-                        <a
-                            className="mr-5 inline-block"
-                            href="https://instagram.com"
-                        >
-                            <InstagramIcon />
-                        </a>
-                    </div>
+                    <SocialMedia variant={'header'} />
 
-                    <nav className="header-menu hidden lg:flex">
-                        <ul className="flex">
-                            <li className={'mx-3 text-center'}>
-                                <a href="/shop" className={'menu-link'}>
-                                    <span>Shop</span>
-                                </a>
-                            </li>
-                            <li className={'mx-3 text-center'}>
-                                <a
-                                    href="/plan-my-kitchen"
-                                    className={'menu-link'}
-                                >
-                                    <span>Plan my kitchen</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
+                    <Menu menu={menu1} />
 
                     <Logo className={'mx-3'} />
 
-                    <nav className="header-menu hidden lg:flex">
-                        <ul className="flex">
-                            <li className={'mx-3 text-center'}>
-                                <a href="/about-us" className={'menu-link'}>
-                                    <span>About us</span>
-                                </a>
-                            </li>
-                            <li className={'mx-3 text-center'}>
-                                <a href="/gallery" className={'menu-link'}>
-                                    <span>Gallery</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
+                    <Menu menu={menu2} />
 
                     <div className="ml-2">
                         <ButtonOutline

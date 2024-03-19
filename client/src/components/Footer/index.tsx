@@ -1,9 +1,28 @@
 import { Logo } from '../Logo/index';
-import { FaceBookFilledIcon } from '../Icons/FacebookFilledIcon/index';
-import { TwitterFilledIcon } from '../Icons/InstagramFilledIcon/index';
-import { InstagramFilledIcon } from '../Icons/TwitterFilledIcon/index';
+import { TMenu } from '../../shared/types/index';
+import { SocialMedia } from '../SocialMedia/index';
+import { getMenu } from '../../api/index';
 
-export const Footer = () => {
+export const Footer = async () => {
+    const menuAbout = await getMenu('7');
+    const menuService = await getMenu('6');
+
+    const Menu = ({ menu }: { menu: TMenu }) => {
+        const MenuItems = menu.items.map(({ url, title, id }) => (
+            <li key={`menu-item-${id}`} className={'mb-2'}>
+                <a href={url} className={'menu-link opacity-80'}>
+                    {title}
+                </a>
+            </li>
+        ));
+
+        return !!menu.items.length ? (
+            <ul className={'text'}>{MenuItems}</ul>
+        ) : (
+            ''
+        );
+    };
+
     return (
         <footer
             className={'w-full bg-black bg-cover bg-center bg-no-repeat py-10'}
@@ -24,54 +43,14 @@ export const Footer = () => {
                 <div className="mb-10 grid grid-cols-1 gap-3 text-center text-white md:grid-cols-2 md:text-left lg:grid-cols-4">
                     <div className="mb-3 md:mb-0">
                         <h4 className={'mb-8 text-white'}>About</h4>
-                        <ul className={'text'}>
-                            <li className={'mb-2'}>
-                                <a href="" className={'menu-link opacity-80'}>
-                                    Shop
-                                </a>
-                            </li>
-                            <li className={'mb-2'}>
-                                <a href="" className={'menu-link opacity-80'}>
-                                    Plan My Kitchen
-                                </a>
-                            </li>
-                            <li className={'mb-2'}>
-                                <a href="" className={'menu-link opacity-80'}>
-                                    About Us
-                                </a>
-                            </li>
-                            <li className={'mb-2'}>
-                                <a href="" className={'menu-link opacity-80'}>
-                                    Gallery
-                                </a>
-                            </li>
-                        </ul>
+                        <Menu menu={menuAbout} />
                     </div>
+
                     <div className="mb-3 md:mb-0">
                         <h4 className={'mb-8 text-white'}>Service</h4>
-                        <ul className={'text'}>
-                            <li className={'mb-2'}>
-                                <a href="" className={'menu-link opacity-80'}>
-                                    Faq
-                                </a>
-                            </li>
-                            <li className={'mb-2'}>
-                                <a href="" className={'menu-link opacity-80'}>
-                                    Contact
-                                </a>
-                            </li>
-                            <li className={'mb-2'}>
-                                <a href="" className={'menu-link opacity-80'}>
-                                    How to buy
-                                </a>
-                            </li>
-                            <li className={'mb-2'}>
-                                <a href="" className={'menu-link opacity-80'}>
-                                    Downloads
-                                </a>
-                            </li>
-                        </ul>
+                        <Menu menu={menuService} />
                     </div>
+
                     <div className="mb-3 md:mb-0">
                         <h4 className={'mb-8 text-white'}>Info</h4>
                         <ul className={'text'}>
@@ -95,24 +74,7 @@ export const Footer = () => {
                     <div className="mb-3 md:mb-0">
                         <h4 className={'mb-8 text-white'}>Follow</h4>
 
-                        <a
-                            className="mr-5 inline-block"
-                            href="https://facebook.com"
-                        >
-                            <FaceBookFilledIcon />
-                        </a>
-                        <a
-                            className="mr-5 inline-block"
-                            href="https://twitter.com"
-                        >
-                            <TwitterFilledIcon />
-                        </a>
-                        <a
-                            className="mr-5 inline-block"
-                            href="https://instagram.com"
-                        >
-                            <InstagramFilledIcon />
-                        </a>
+                        <SocialMedia variant={'footer'} />
                     </div>
                 </div>
 
